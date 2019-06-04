@@ -13,10 +13,17 @@ function numCoins = optimalCoinChange(x, denoms)
 % YOUR NAME AND USERNAME GOES HERE
 % Name: Zinzan Zhao       UPI: zzha440
 
-    %setUpMemoize(x);
-    %numCoins = memoizeVariant(x,denoms);
+    % Uncomment the section below to run the recursion with memoization 
+    % Also, comment out the noRecursion line as well.
+    %
+    % setUpMemoize(x);
+    % numCoins = memoizeVariant(x, denoms);
     
-    numCoins = noRecursion(x, denoms);
+    
+    % No recursion method (more efficient)
+    % Comment this part out if you want to run the memoization variant
+    %
+     numCoins = noRecursion(x, denoms);
 end
 
 % Recursive function with memoization
@@ -90,19 +97,6 @@ end
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 % No recursion variant for better performance
 % Takes advantage of ordering of problem
 %
@@ -113,8 +107,10 @@ end
 % Name: Zinzan Zhao       UPI: zzha440
 function numCoins = noRecursion(x, denoms)
 
+% Initialise the table of optimal values for each amount of change
 table = zeros(x,1) + Inf;
 
+    % Nested function for efficiency.
     function r = getTable(index)
         if (index == 0)
             r = 0;
@@ -141,6 +137,7 @@ for i = 1:N
     end
 end
 
+% Set return parameter
 numCoins = getTable(x);
 
 return 
