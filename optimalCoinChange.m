@@ -16,14 +16,14 @@ function numCoins = optimalCoinChange(x, denoms)
     % Uncomment the section below to run the recursion with memoization 
     % Also, comment out the noRecursion line as well.
     %
-    % setUpMemoize(x);
-    % numCoins = memoizeVariant(x, denoms);
+     setUpMemoize(x);
+     numCoins = memoizeVariant(x, denoms);
     
     
     % No recursion method (more efficient)
     % Comment this part out if you want to run the memoization variant
     %
-     numCoins = noRecursion(x, denoms);
+    % numCoins = noRecursion(x, denoms);
 end
 
 % Recursive function with memoization
@@ -48,21 +48,15 @@ function numCoins = memoizeVariant(x, denoms)
            
     % Calculate value from scratch if not memoized
     for i = denoms
-        
-        % Base case
-        if (i == x)
-            numCoins = 1;
-            setGlobalMem(x, 1);
-            return
+
         % Recurse if there exists a denomination smaller than x        
-        elseif (i < x)
+        if (i <= x)
             temp = 1 +  memoizeVariant(x - i, denoms);
             
             % Save the value only if it is the minimum
             if (temp < numCoins)
                 numCoins = temp;
             end
-        else
         end
     end
     

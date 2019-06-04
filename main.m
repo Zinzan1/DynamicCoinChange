@@ -4,10 +4,10 @@
 global memoisedNumCoins;
 
 % Set the amount of change (in cents)
-x = 100;
+x = 1000;
 
 % Set the denomination amounts
-denoms = [1,3,4,8,11];
+denoms = [8,11,17,43];
 
 % Call the method
 optimalCoinChange(x, denoms)
