@@ -16,14 +16,14 @@ function numCoins = optimalCoinChange(x, denoms)
     % Uncomment the section below to run the recursion with memoization 
     % Also, comment out the noRecursion line as well.
     %
-     setUpMemoize(x);
-     numCoins = memoizeVariant(x, denoms);
+    % setUpMemoize(x);
+    % numCoins = memoizeVariant(x, denoms);
     
     
     % No recursion method (more efficient)
     % Comment this part out if you want to run the memoization variant
     %
-    % numCoins = noRecursion(x, denoms);
+     numCoins = noRecursion(x, denoms);
 end
 
 % Recursive function with memoization
