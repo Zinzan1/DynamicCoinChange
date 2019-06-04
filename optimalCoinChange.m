@@ -13,8 +13,10 @@ function numCoins = optimalCoinChange(x, denoms)
 % YOUR NAME AND USERNAME GOES HERE
 % Name: Zinzan Zhao       UPI: zzha440
 
-    setUpMemoize(x);
-    numCoins = memoizeVariant(x,denoms);
+    %setUpMemoize(x);
+    %numCoins = memoizeVariant(x,denoms);
+    
+    numCoins = noRecursion(x, denoms);
 end
 
 % Recursive function with memoization
@@ -82,3 +84,66 @@ function r = getGlobalMem(index)
     global memoisedNumCoins;
     r = memoisedNumCoins(index);
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% No recursion variant for better performance
+% Takes advantage of ordering of problem
+%
+%   Less memory
+%   Faster
+%   Cleaner code (sort of)
+%
+% Name: Zinzan Zhao       UPI: zzha440
+function numCoins = noRecursion(x, denoms)
+
+table = zeros(x,1) + Inf;
+
+    function r = getTable(index)
+        if (index == 0)
+            r = 0;
+        else
+            r = table(index);
+        end
+    end
+
+% Get number of denominations of coins
+N = size(denoms,2);
+
+% Loops through all denominations of coins
+for i = 1:N
+    % Loops through all amounts of change from denomination to x
+    for j = denoms(i):x
+        
+      % Calculates the tentative solution
+      temp2 = 1 + getTable(j - denoms(i));
+      
+      % Adds tentative solution only if it is better than previous value
+      if (temp2 < getTable(j))
+        table(j) = temp2;
+      end
+    end
+end
+
+numCoins = getTable(x);
+
+return 
+end
+
+
