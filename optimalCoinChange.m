@@ -17,29 +17,39 @@ function numCoins = optimalCoinChange(x, denoms)
     numCoins = memoizeVariant(x,denoms);
 end
 
+% Recursive function with memoization
 function numCoins = memoizeVariant(x, denoms)
-
+    % Temporary variable for saving potential candidates for memoizing
     temp = Inf;
+    
+    % Setting default value for numCoins
     numCoins = Inf;
-
+    
+    % Base case for recursion
     if (x == 0)
         numCoins = 0;
         return
     end
     
+    % Get memoized value if calculated
     if (getGlobalMem(x) ~= 0)
         numCoins = getGlobalMem(x);
         return 
     end
            
+    % Calculate value from scratch if not memoized
     for i = denoms
+        
+        % Base case
         if (i == x)
             numCoins = 1;
             setGlobalMem(x, 1);
             return
-                
+        % Recurse if there exists a denomination smaller than x        
         elseif (i < x)
             temp = 1 +  memoizeVariant(x - i, denoms);
+            
+            % Save the value only if it is the minimum
             if (temp < numCoins)
                 numCoins = temp;
             end
@@ -47,22 +57,27 @@ function numCoins = memoizeVariant(x, denoms)
         end
     end
     
+    % Memoize the smallest value
     setGlobalMem(x, numCoins);
     
+    % Set return value
     numCoins = getGlobalMem(x);
     return
 end
 
+% Helper function for setting up initial state of memoize array
 function setUpMemoize(size)
 global memoisedNumCoins;
 memoisedNumCoins =  zeros(size,1);
 end
 
+% Helper function for setting a global value in memoize array
 function setGlobalMem(index, value)
 global memoisedNumCoins
 memoisedNumCoins(index) = value;
 end
 
+% Helper function for getting the value at an index in memoize array
 function r = getGlobalMem(index)
     global memoisedNumCoins;
     r = memoisedNumCoins(index);
