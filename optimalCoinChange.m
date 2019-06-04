@@ -18,19 +18,7 @@ function numCoins = optimalCoinChange(x, denoms)
 end
 
 function numCoins = memoizeVariant(x, denoms)
-% Function finds the minimum number of coins required to change a monetary
-% amount.
-% Inputs:
-% x = amount of money to be given in coins, given as an INTEGER, in cents.
-%           e.g. $1.35 is input as 135
-% denoms = denominations of coins available, in INTEGER cents, 
-%           given as a ROW VECTOR.
-%
-% Output:
-% numCoins = optimal number of coins used to find x
-%
-% YOUR NAME AND USERNAME GOES HERE
-% Name: Zinzan Zhao       UPI: zzha440
+
     temp = Inf;
     numCoins = Inf;
 
